@@ -1,6 +1,6 @@
 import web3 from '../web3'
 
-const address = '0x1fa9083c1c4c936ba639efd985ffc463f837d8bb'
+const address = '0x9c3f4f6295c7a759dff2dcfed3aeccb9d4507c42'
 const abi = [
 	{
 		"constant": true,
@@ -41,6 +41,21 @@ const abi = [
 		"outputs": [],
 		"payable": false,
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getAuctions",
+		"outputs": [
+			{
+				"internalType": "contract Auction[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
 		"type": "function"
 	}
 ];

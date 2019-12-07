@@ -12,6 +12,10 @@ contract AuctionHouse {
           auctions.push(newAuction);
           auctionCount++;
         }
+        
+    function getAuctions() public view returns(Auction[] memory) {
+        return auctions;
+    }
 }
 
 contract Auction {
@@ -46,9 +50,9 @@ contract Auction {
         require(state == State.Started, "The auction has to be started!");
         require(owner == msg.sender, "Only the owner can close the auction!");
         // TODO: time expired or max bid reached
-
+        
         owner.transfer(highestBid);
-
+        
         state = State.Finished;
         owner = highestBidOwner;
     }
