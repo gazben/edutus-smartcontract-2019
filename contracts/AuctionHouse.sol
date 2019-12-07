@@ -15,14 +15,14 @@ contract AuctionHouse {
 }
 
 contract Auction {
-    string title;
-    string description;
+    string public title;
+    string public description;
     address payable owner;
-    uint256 highestBid;
+    uint256 public highestBid;
     address payable highestBidOwner;
 
     enum State{Listed, Started, Finished}
-    State state;
+    State public state;
 
     constructor(
         address payable _owner,
@@ -46,13 +46,18 @@ contract Auction {
         require(state == State.Started, "The auction has to be started!");
         require(owner == msg.sender, "Only the owner can close the auction!");
         // TODO: time expired or max bid reached
+        
+        owner.transfer(highestBid);
+        
         state = State.Finished;
         owner = highestBidOwner;
     }
 
     function bid() public payable {
+        require(msg.sender != owner, "You cannot bid on your own auction!");
         require(msg.value > highestBid, "Your bid needs to be higher than the current!");
         require(msg.sender != highestBidOwner, "YOu cannot bid on top of your own!");
+        require(state == State.Started, "You can only bid on Started auctions!");
 
         highestBidOwner.transfer(highestBid);
 
