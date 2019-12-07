@@ -13,3 +13,5 @@ try {
     console.error('Metamask init failed')
     console.log(e)
 }
+
+export default window.web3;
